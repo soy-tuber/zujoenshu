@@ -360,6 +360,15 @@ details.gate>.gin>.dek{margin-top:0;}
   .gen .ja{grid-area:ja;}
 }
 
+/* --- 年表（背骨）。文書のある年はリンク、出来事だけの年は控えめに --- */
+.ladder.spine>li{padding-bottom:16px;}
+.ladder.spine .yr{font-variant-numeric:tabular-nums;}
+.ladder.spine .yr .mo{margin-left:5px;font-size:.82em;color:var(--muted);}
+.ladder.spine>li.ev .q{font-weight:400;color:var(--muted);}
+.ladder.spine>li.ev .dot{opacity:.45;}
+.ladder.spine .q a{text-decoration:none;border-bottom:1px solid var(--accent-br);}
+.ladder.spine .body{font-size:.86rem;color:var(--muted);}
+
 /* --- 印刷（机で解くため） --- */
 @media print{
   .gen .cl{display:block !important;}
