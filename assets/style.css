@@ -1,0 +1,375 @@
+/* 図上演習 v2 — 戦間期シリーズ 共通スタイル（build.py が各HTMLへインライン展開する） */
+:root{--bg:#E4E7EB;--bg-grid:#D3D8DE;--surface:#FBFAF7;--ink:#1B2530;--muted:#59636F;--faint:#808B97;--line:#D2D6DC;--accent:#9A6A22;--accent-br:#B7842E;--green:#3D6555;--alert:#8C4A32;--quote-bg:#F1EADA;--quote-edge:#C9A85E;--hoi-bg:#EEE7DA;--panel:#F3F1EC;--shadow:0 1px 2px rgba(20,30,42,.06),0 10px 30px rgba(20,30,42,.09);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E151C;--bg-grid:#16212C;--surface:#172029;--ink:#E9E4D7;--muted:#98A3AE;--faint:#6C7883;--line:#2A3641;--accent:#D8A64E;--accent-br:#E7B65E;--green:#74AD90;--alert:#D98A6A;--quote-bg:#1B2620;--quote-edge:#8A6E33;--hoi-bg:#1C242C;--panel:#141C24;--shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.45);}}
+:root[data-theme="dark"]{--bg:#0E151C;--bg-grid:#16212C;--surface:#172029;--ink:#E9E4D7;--muted:#98A3AE;--faint:#6C7883;--line:#2A3641;--accent:#D8A64E;--accent-br:#E7B65E;--green:#74AD90;--alert:#D98A6A;--quote-bg:#1B2620;--quote-edge:#8A6E33;--hoi-bg:#1C242C;--panel:#141C24;--shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.45);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(var(--bg-grid) 1px,transparent 1px),linear-gradient(90deg,var(--bg-grid) 1px,transparent 1px);background-size:34px 34px,34px 34px;color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Noto Sans JP","Meiryo",sans-serif;line-height:1.95;font-size:17px;letter-spacing:.012em;-webkit-font-smoothing:antialiased;}
+.mono{font-family:"SFMono-Regular",ui-monospace,"JetBrains Mono","Roboto Mono",Menlo,Consolas,monospace;}
+.mincho{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;}
+
+/* --- ヘッダ --- */
+.masthead{max-width:1000px;margin:0 auto;padding:22px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;text-decoration:none;color:inherit;}
+.brand .glyph{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;font-size:1.15rem;font-weight:600;letter-spacing:.14em;}
+.brand .sub{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);}
+.toggle{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 13px;font-size:.72rem;letter-spacing:.1em;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s;}
+.toggle:hover{color:var(--accent);border-color:var(--accent-br);}
+.toggle:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+main{max-width:1000px;margin:0 auto;padding:20px 24px 90px;}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:clamp(24px,5vw,58px);}
+
+/* --- 見出し --- */
+.eyebrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.2em;color:var(--accent);margin-bottom:18px;}
+.eyebrow .tick{display:inline-block;width:26px;height:2px;background:var(--accent-br);}
+.eyebrow .no{color:var(--faint);}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;font-weight:600;font-size:clamp(1.8rem,4.4vw,2.85rem);line-height:1.3;margin:0;text-wrap:balance;}
+.dek{font-size:1.02rem;color:var(--muted);margin:12px 0 0;max-width:62ch;}
+.metabar{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin:24px 0 0;padding:16px 0 0;border-top:1px solid var(--line);font-size:.82rem;}
+.metabar .k{color:var(--faint);}
+.pill{border:1px solid var(--line);border-radius:999px;padding:3px 11px;color:var(--muted);}
+.pill.era{border-color:var(--quote-edge);color:var(--accent);}
+h2{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;font-size:1.34rem;font-weight:600;margin:50px 0 14px;padding-bottom:8px;display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);}
+h2 .idx{font-size:.72rem;letter-spacing:.1em;color:var(--accent);border:1px solid var(--quote-edge);border-radius:3px;padding:2px 7px;transform:translateY(-2px);flex:none;}
+h3{font-size:1.02rem;font-weight:600;margin:28px 0 10px;}
+p{margin:0 0 15px;}
+.sheet strong{font-weight:600;}
+.key{color:var(--accent);font-weight:600;}
+.warn{color:var(--alert);font-weight:600;}
+
+/* --- 設問引用 --- */
+.qwrap{margin:30px 0;}
+.qhead{display:flex;align-items:center;gap:10px;font-size:.74rem;letter-spacing:.16em;color:var(--muted);margin-bottom:10px;}
+.qhead .mono{color:var(--accent);}
+blockquote.q{margin:0;background:var(--quote-bg);border:1px solid var(--quote-edge);border-left:4px solid var(--quote-edge);border-radius:3px;padding:20px 24px;font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;font-size:1.04rem;line-height:1.95;}
+blockquote.q .limit{display:inline-block;margin-top:10px;font-size:.82rem;color:var(--accent);}
+.qnote{margin:10px 2px 0;font-size:.78rem;color:var(--faint);line-height:1.7;}
+
+/* --- 用語のちいさな説明 --- */
+.gloss{border:1px solid var(--line);border-left:3px solid var(--accent-br);background:var(--panel);border-radius:0 4px 4px 0;padding:11px 15px;margin:14px 0;font-size:.9rem;line-height:1.8;}
+.gloss b{color:var(--accent);}
+
+/* --- 図 --- */
+figure{margin:26px 0;padding:0;}
+.figbox{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:14px;}
+.figbox svg{display:block;min-width:760px;width:100%;height:auto;color:var(--ink);}
+figcaption{margin-top:10px;font-size:.82rem;color:var(--muted);line-height:1.7;}
+figcaption b{color:var(--accent);}
+.s-cat{font-size:13px;font-weight:700;fill:var(--accent);}
+.s-lab{font-size:12.5px;fill:currentColor;}
+.s-sm{font-size:11.5px;fill:var(--muted);}
+.s-hot{fill:var(--accent-br);font-weight:700;}
+.s-box{fill:var(--surface);stroke:currentColor;stroke-width:1.4;}
+.s-boxa{fill:var(--quote-bg);stroke:var(--accent);stroke-width:1.8;}
+
+/* --- 歴史家が割れている --- */
+.split{border:1px solid var(--line);border-radius:4px;margin:22px 0;overflow:hidden;}
+.split>.hd{background:var(--quote-bg);padding:12px 18px;font-weight:700;color:var(--accent);font-size:.95rem;}
+.split .body{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.split .col{padding:16px 18px;}
+.split .col+.col{border-left:1px solid var(--line);}
+.split .nm{font-weight:700;font-size:.93rem;margin-bottom:2px;}
+.split .who{font-size:.76rem;color:var(--faint);margin-bottom:9px;}
+.split .col p{font-size:.9rem;line-height:1.8;margin:0 0 9px;}
+.split .ev{font-size:.84rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px;margin-top:2px;}
+.split .ev b{color:var(--accent);}
+@media (max-width:620px){.split .col+.col{border-left:none;border-top:1px solid var(--line);}}
+
+/* --- 君ならどう考える --- */
+.think{margin:24px 0;border:2px solid var(--quote-edge);border-radius:4px;background:var(--quote-bg);padding:16px 20px;}
+.think .tag{font-size:.72rem;letter-spacing:.16em;color:var(--accent);font-weight:700;display:block;margin-bottom:8px;}
+.think p{margin:0 0 10px;font-size:.95rem;line-height:1.85;}
+.think p:last-child{margin-bottom:0;}
+
+/* --- 意外な事実 --- */
+ul.anom{list-style:none;margin:20px 0;padding:0;display:grid;gap:11px;}
+ul.anom li{border:1px solid var(--line);border-left:3px solid var(--alert);border-radius:0 4px 4px 0;padding:12px 16px;background:var(--panel);font-size:.93rem;line-height:1.8;}
+ul.anom b{color:var(--alert);}
+
+/* --- HOI4 --- */
+.hoi{margin:28px 0;background:var(--hoi-bg);border:1px solid var(--quote-edge);border-radius:4px;padding:20px 24px;}
+.hoi .tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.16em;color:var(--accent);font-weight:700;margin-bottom:12px;}
+.hoi p{margin:0 0 12px;}
+.hoi p:last-child{margin-bottom:0;}
+.hoi .map{color:var(--green);font-weight:600;}
+.tblwrap{overflow-x:auto;}
+.ledger{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.89rem;}
+.ledger th,.ledger td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+.ledger th{background:var(--quote-bg);color:var(--accent);font-weight:700;font-size:.82rem;}
+.ledger td:first-child{width:38%;font-weight:600;}
+
+/* --- 次の話へ --- */
+.nextup{margin:34px 0 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;border-top:2px solid var(--quote-edge);padding-top:18px;}
+.nextup .txt{font-size:.92rem;color:var(--muted);max-width:60ch;}
+.nextup a{display:inline-flex;align-items:center;gap:8px;background:var(--quote-bg);border:1px solid var(--accent-br);color:var(--accent);text-decoration:none;border-radius:999px;padding:9px 18px;font-weight:700;font-size:.9rem;white-space:nowrap;}
+.nextup a:hover{background:var(--accent);color:var(--surface);}
+.nextup a:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+
+/* --- 出典・メモ --- */
+.biblio{margin:16px 0 0;font-size:.85rem;color:var(--muted);line-height:1.9;}
+.biblio div{padding-left:1.4em;text-indent:-1.4em;}
+.biblio em{font-style:italic;color:var(--ink);}
+.src{margin:32px 0 0;padding:18px 20px;border:1px dashed var(--line);border-radius:4px;font-size:.84rem;color:var(--muted);}
+.src .lab{color:var(--faint);letter-spacing:.1em;font-size:.72rem;}
+.src a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--quote-edge);}
+.ednote{margin:30px 0 0;border-top:2px solid var(--quote-edge);padding-top:16px;font-size:.82rem;color:var(--muted);line-height:1.75;}
+.ednote b{color:var(--accent);}
+.foot{max-width:1000px;margin:26px auto 0;padding:0 24px;font-size:.74rem;color:var(--faint);text-align:center;}
+
+/* --- ハブ（目次） --- */
+.lead{max-width:62ch;margin:8px 0 0;color:var(--muted);font-size:1.03rem;}
+.chainlist{display:grid;gap:14px;margin:28px 0 0;}
+a.ep{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:16px 20px;text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .15s,border-color .2s;}
+a.ep:hover{transform:translateY(-2px);border-color:var(--accent-br);}
+a.ep:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+a.ep .num{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-size:1.5rem;font-weight:600;color:var(--accent);text-align:center;line-height:1.2;}
+a.ep .num small{display:block;font-size:.6rem;letter-spacing:.14em;color:var(--faint);}
+a.ep .t{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-weight:600;font-size:1.16rem;line-height:1.4;}
+a.ep .s{font-size:.85rem;color:var(--muted);margin-top:4px;line-height:1.65;}
+a.ep .yr{font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;}
+@media (max-width:600px){a.ep{grid-template-columns:56px 1fr;}a.ep .yr{grid-column:2;}}
+.backbar{max-width:1000px;margin:0 auto;padding:14px 24px 0;}
+.backbar a{display:inline-flex;align-items:center;gap:7px;color:var(--muted);text-decoration:none;font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--surface);}
+.backbar a:hover{color:var(--accent);border-color:var(--accent-br);}
+
+/* --- 第零話（七月危機）で使う要素 --- */
+.schools{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:22px 0;}
+.school{border:1px solid var(--line);border-radius:4px;padding:16px 18px;background:var(--panel);}
+.school .nm{font-weight:700;color:var(--accent);font-size:.95rem;}
+.school .yr{color:var(--faint);font-size:.78rem;margin-left:6px;font-variant-numeric:tabular-nums;}
+.school .claim{margin:8px 0 0;font-size:.92rem;line-height:1.8;}
+.school .ev{margin:8px 0 0;font-size:.84rem;color:var(--muted);line-height:1.7;}
+.school .ev em{color:var(--ink);font-style:normal;font-weight:600;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px;margin:20px 0;}
+.card2{border:1px solid var(--line);border-radius:4px;padding:16px 18px;background:var(--panel);}
+.card2 h4{margin:0 0 8px;font-size:.95rem;font-weight:700;color:var(--accent);}
+.card2 p{margin:0;font-size:.9rem;line-height:1.75;}
+.card2 p+p{margin-top:8px;}
+ol.chain{list-style:none;margin:22px 0;padding:0;}
+ol.chain li{position:relative;padding:0 0 20px 104px;}
+ol.chain li::before{content:"";position:absolute;left:74px;top:8px;bottom:-4px;width:2px;background:var(--line);}
+ol.chain li:last-child::before{display:none;}
+ol.chain .d{position:absolute;left:0;top:0;width:64px;text-align:right;font-size:.8rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;}
+ol.chain .dot{position:absolute;left:69px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent-br);}
+ol.chain b{display:block;}
+ol.chain p{margin:2px 0 0;font-size:.94rem;}
+.cf{margin-top:8px !important;padding:9px 13px;border-left:3px solid var(--quote-edge);background:var(--quote-bg);font-size:.88rem !important;border-radius:0 3px 3px 0;}
+.cf .lab{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.08em;margin-right:6px;}
+.stance{border:1px solid var(--line);border-radius:4px;margin:16px 0;overflow:hidden;}
+.stance>.hd{background:var(--quote-bg);padding:12px 18px;font-weight:700;color:var(--accent);font-size:.95rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;}
+.stance>.hd .risk{font-weight:400;font-size:.8rem;color:var(--muted);}
+.stance .bd{padding:14px 18px;font-size:.93rem;line-height:1.8;}
+.stance .bd .line{margin:0 0 8px;}
+.stance .bd .line:last-child{margin-bottom:0;}
+.stance .bd .tag{display:inline-block;min-width:64px;color:var(--accent);font-weight:600;font-size:.82rem;}
+ol.front{margin:18px 0;padding-left:1.3em;}
+ol.front li{margin-bottom:12px;font-size:.95rem;line-height:1.8;}
+ol.front b{color:var(--accent);}
+.fb-cat{font-size:13px;font-weight:700;fill:var(--accent);}
+.fb-label{font-size:12px;fill:currentColor;}
+.fb-hot{fill:var(--accent-br);font-weight:700;}
+.fb-note{font-size:11.5px;fill:var(--muted);}
+.fb-head{font-size:13px;font-weight:700;fill:var(--accent);}
+.dm-lab{font-size:12.5px;fill:currentColor;}
+.dm-ax{font-size:12px;fill:var(--muted);}
+.dm-hot{font-size:12.5px;fill:var(--accent);font-weight:700;}
+
+/* --- 設問の要求 分解パネル --- */
+.demand{border:2px solid var(--accent-br);border-radius:4px;margin:20px 0 8px;overflow:hidden;}
+.demand>.hd{background:var(--accent);color:var(--surface);padding:10px 18px;font-weight:700;font-size:.9rem;letter-spacing:.04em;}
+.demand .row{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line);}
+.demand .row:first-of-type{border-top:none;}
+.demand .k{background:var(--quote-bg);color:var(--accent);font-weight:700;font-size:.82rem;padding:12px 14px;border-right:1px solid var(--line);display:flex;align-items:flex-start;}
+.demand .v{padding:12px 16px;font-size:.91rem;line-height:1.8;}
+.demand .v b{color:var(--ink);}
+.demand .v .no{color:var(--alert);font-weight:600;}
+@media (max-width:600px){.demand .row{grid-template-columns:1fr;}.demand .k{border-right:none;border-bottom:1px solid var(--line);}}
+/* --- 節が答案に効くかどうかの印 --- */
+.rel{font-size:.66rem;letter-spacing:.08em;font-weight:700;border-radius:3px;padding:3px 8px;white-space:nowrap;flex:none;transform:translateY(-2px);}
+.rel-pre{background:var(--panel);color:var(--muted);border:1px solid var(--line);}
+.rel-ext{background:transparent;color:var(--accent);border:1px dashed var(--accent-br);}
+.rel-out{background:var(--panel);color:var(--green);border:1px solid var(--green);}
+.rel-case{background:var(--quote-bg);color:var(--alert);border:1px solid var(--alert);}
+
+/* gakushu — 追加分だけ。土台は sekaishi/kouhyou/v2/_style.css（コピーせず連結して使う） */
+
+/* --- サイト内ナビ（ローカル複数ページ用） --- */
+.sitenav{max-width:1000px;margin:0 auto;padding:10px 24px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.82rem;}
+.sitenav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 13px;background:var(--surface);}
+.sitenav a:hover{color:var(--accent);border-color:var(--accent-br);}
+.sitenav a[aria-current="page"]{color:var(--accent);border-color:var(--accent-br);background:var(--quote-bg);font-weight:700;}
+.sitenav .sep{color:var(--faint);}
+
+/* --- 問題文（原文の書き起こし。画像は使わない） --- */
+.qtext{margin:18px 0;border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:0 0 18px;}
+.qtext>.lab{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;
+  padding:9px 20px;border-bottom:1px solid var(--line);background:var(--quote-bg);border-radius:4px 4px 0 0;
+  font-size:.74rem;letter-spacing:.16em;color:var(--accent);font-weight:700;}
+.qtext>.lab .src{letter-spacing:.04em;font-weight:400;color:var(--faint);}
+.qtext>*:not(.lab){margin-left:20px;margin-right:20px;}
+.qtext p{font-size:.95rem;line-height:1.95;margin:14px 0;}
+.qtext .stem{margin-top:16px;}
+.qtext .en{font-family:"Hiragino Mincho ProN",Georgia,"Times New Roman",serif;}
+.qtext u,.qtext .ul{text-decoration:none;border-bottom:1.5px solid var(--accent-br);padding-bottom:1px;}
+.qtext .mk{font-size:.72rem;vertical-align:super;color:var(--accent);font-weight:700;letter-spacing:.04em;}
+.qtext .bl{display:inline-block;min-width:4.2em;border-bottom:1px solid var(--muted);
+  text-align:center;color:var(--faint);font-size:.9em;}
+.qtext .box{display:inline-block;border:1px solid var(--muted);border-radius:2px;
+  padding:0 .5em;margin:0 .15em;font-size:.9em;color:var(--muted);}
+
+/* 設問 */
+.qtext ol.qs{list-style:none;counter-reset:none;margin:16px 0 0;padding:0;}
+.qtext ol.qs>li{position:relative;padding:12px 0 12px 3.2em;border-top:1px solid var(--line);font-size:.95rem;line-height:1.95;}
+.qtext ol.qs>li>.n{position:absolute;left:0;top:12px;width:2.6em;text-align:right;
+  font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;font-size:.9rem;}
+.qtext ol.qs ol.sub{list-style:none;margin:8px 0 0;padding:0;}
+.qtext ol.qs ol.sub>li{position:relative;padding:6px 0 6px 2.4em;}
+.qtext ol.qs ol.sub>li>.n{position:absolute;left:0;top:6px;width:1.9em;text-align:right;color:var(--muted);font-weight:700;}
+
+/* 選択肢 */
+.qtext .ch{list-style:none;margin:9px 0 0;padding:0;}
+.qtext .ch>li{position:relative;padding:3px 0 3px 2.2em;font-size:.93rem;line-height:1.8;}
+.qtext .ch>li>.n{position:absolute;left:0;top:3px;width:1.6em;text-align:center;
+  color:var(--accent);font-weight:700;}
+
+/* 資料・図表・会話文 */
+.qtext .shiryo{border:1px solid var(--line);border-radius:3px;background:var(--surface);
+  padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.85;}
+.qtext .shiryo>.t{font-size:.72rem;letter-spacing:.14em;color:var(--faint);font-weight:700;margin-bottom:6px;}
+.qtext .talk{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;font-size:.93rem;line-height:1.85;}
+.qtext .talk>.w{color:var(--accent);font-weight:700;white-space:nowrap;}
+.qtext .note{font-size:.84rem;color:var(--muted);line-height:1.8;margin-top:10px;}
+.qtext table{border-collapse:collapse;font-size:.88rem;margin:12px 0;min-width:min(100%,340px);}
+.qtext table th,.qtext table td{border:1px solid var(--line);padding:5px 11px;text-align:left;}
+.qtext table th{background:var(--quote-bg);font-weight:700;color:var(--accent);}
+.qtext .tw{overflow-x:auto;}
+
+/* 図版の代わりに置く説明。原本の図は載せず、読み取れる内容を言葉にする */
+.qtext .fig{border:1px dashed var(--line);border-radius:3px;padding:11px 15px;margin:14px 0;
+  font-size:.89rem;color:var(--muted);line-height:1.85;background:var(--surface);}
+.qtext .fig>.t{font-size:.72rem;letter-spacing:.14em;color:var(--accent);font-weight:700;margin-bottom:5px;}
+
+/* 未収録 */
+.qtext.missing{padding:22px 20px;border-style:dashed;color:var(--muted);font-size:.9rem;}
+.qtext .omit{border-left:3px solid var(--alert);background:var(--quote-bg);padding:9px 14px;
+  color:var(--alert);font-size:.88rem;margin:14px 0;}
+
+/* --- 段階ヒント --- */
+.hint{margin:18px 0;border:1px solid var(--line);border-left:3px solid var(--accent-br);border-radius:0 4px 4px 0;background:var(--panel);padding:6px 14px;}
+.hint>details{border-top:1px solid var(--line);padding:9px 0;}
+.hint>details:first-of-type{border-top:none;}
+.hint>details>summary{cursor:pointer;font-weight:700;font-size:.88rem;color:var(--accent);list-style:none;display:flex;align-items:center;gap:8px;}
+.hint>details>summary::-webkit-details-marker{display:none;}
+.hint>details>summary::before{content:"▸";color:var(--accent-br);}
+.hint>details[open]>summary::before{content:"▾";}
+.hint>details>summary:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+.hint>details>div{margin:8px 0 2px;font-size:.93rem;line-height:1.85;}
+.hint>details.answer>summary{color:var(--green);}
+.hint>details.answer>summary::before{color:var(--green);}
+
+/* --- 理系の補助線（地政学・気候・資源） --- */
+.sci{margin:24px 0;background:var(--panel);border:1px solid var(--green);border-radius:4px;padding:18px 22px;}
+.sci .tag{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.16em;color:var(--green);font-weight:700;margin-bottom:10px;}
+.sci p{margin:0 0 10px;font-size:.94rem;}
+.sci p:last-child{margin-bottom:0;}
+.sci b{color:var(--ink);}
+
+/* --- 現代から遡る梯子 --- */
+.ladder{list-style:none;margin:24px 0;padding:0;}
+.ladder>li{position:relative;padding:0 0 26px 116px;}
+.ladder>li::before{content:"";position:absolute;left:86px;top:10px;bottom:-6px;width:2px;background:var(--line);}
+.ladder>li:last-child::before{display:none;}
+.ladder .yr{position:absolute;left:0;top:2px;width:76px;text-align:right;font-size:.86rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;}
+.ladder .dot{position:absolute;left:81px;top:11px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent-br);}
+.ladder .q{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-size:1.12rem;font-weight:600;margin-bottom:6px;}
+.ladder .body{font-size:.94rem;color:var(--muted);line-height:1.8;}
+@media (max-width:560px){.ladder>li{padding-left:74px;}.ladder>li::before{left:52px;}.ladder .dot{left:47px;}.ladder .yr{width:44px;font-size:.78rem;}}
+
+/* --- 大問カード --- */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:14px;margin:22px 0;}
+a.qcard{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:15px 17px;text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .15s,border-color .2s;}
+a.qcard:hover{transform:translateY(-2px);border-color:var(--accent-br);}
+a.qcard:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+a.qcard .qno{font-size:.72rem;letter-spacing:.16em;color:var(--accent);font-weight:700;}
+a.qcard .qt{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;font-weight:600;font-size:1.06rem;line-height:1.45;}
+a.qcard .qm{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;font-size:.74rem;color:var(--muted);}
+a.qcard .qm span{border:1px solid var(--line);border-radius:999px;padding:2px 9px;}
+a.qcard.missing{opacity:.55;pointer-events:none;border-style:dashed;}
+
+/* --- 状態バッジ --- */
+.badge{display:inline-block;font-size:.66rem;letter-spacing:.08em;font-weight:700;border-radius:3px;padding:3px 8px;vertical-align:middle;}
+.badge-draft{background:var(--quote-bg);color:var(--alert);border:1px solid var(--alert);}
+.badge-missing{background:var(--panel);color:var(--faint);border:1px dashed var(--line);}
+.badge-official{background:var(--quote-bg);color:var(--accent);border:1px solid var(--accent-br);}
+
+/* --- 観点（lens）チップ --- */
+.lenses{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0;}
+.lenses .lens{font-size:.76rem;border:1px solid var(--green);color:var(--green);border-radius:999px;padding:3px 11px;background:var(--panel);}
+button.lens{cursor:pointer;font-family:inherit;transition:background .15s,color .15s;}
+button.lens:hover{background:var(--quote-bg);}
+button.lens[aria-pressed="true"]{background:var(--green);color:var(--surface);font-weight:700;}
+button.lens:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+.ladder>li{transition:opacity .2s;}
+
+/* --- 素材つき大問の索引 --- */
+ul.matlist{list-style:none;padding:0;margin:16px 0 4px;}
+ul.matlist>li{border-top:1px solid var(--line);padding:11px 0;}
+ul.matlist>li:first-child{border-top:none;}
+ul.matlist>li>a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;
+  text-decoration:none;}
+ul.matlist>li>a:hover .qt{text-decoration:underline;}
+ul.matlist .qno{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.78rem;color:var(--muted);white-space:nowrap;}
+ul.matlist .qt{font-weight:700;color:var(--accent);font-size:.93rem;}
+ul.matlist .mats{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+ul.matlist .mats .pill{font-size:.74rem;}
+
+/* --- 関門（読み物は、骨を立ててから開く） --- */
+details.gate{margin:26px 0 8px;border:1px solid var(--accent-br);border-radius:6px;
+  background:var(--quote-bg);}
+details.gate>summary{cursor:pointer;list-style:none;padding:13px 16px;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;}
+details.gate>summary::-webkit-details-marker{display:none;}
+details.gate>summary::before{content:"▸";color:var(--accent-br);font-weight:700;}
+details.gate[open]>summary::before{content:"▾";}
+details.gate>summary:focus-visible{outline:2px solid var(--accent-br);outline-offset:2px;}
+details.gate>summary .lb{font-weight:700;color:var(--accent);font-size:.95rem;}
+details.gate>summary .sb{color:var(--muted);font-size:.82rem;}
+details.gate[open]{background:transparent;border-color:var(--line);}
+details.gate>.gin{padding:2px 16px 16px;}
+details.gate>.gin>.gnote{font-size:.84rem;line-height:1.8;color:var(--muted);
+  border-left:2px solid var(--accent-br);padding:2px 0 2px 12px;margin:0 0 18px;}
+details.gate>.gin>.dek{margin-top:0;}
+
+/* --- 原典（条文）。原文と訳を上下に並べる --- */
+.gen{margin:14px 0 22px;}
+.gen .cl{border-left:2px solid var(--accent-br);padding:2px 0 2px 14px;margin:0 0 20px;}
+.gen .cl>.n{font-size:.8rem;color:var(--accent);font-weight:700;letter-spacing:.04em;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0 0 7px;}
+.gen .cl>.n .lb{color:var(--muted);font-weight:400;letter-spacing:0;}
+.gen .orig{font-size:.86rem;line-height:1.85;color:var(--muted);margin:0 0 9px;
+  font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  overflow-wrap:break-word;hyphens:auto;}
+.gen .ja{font-size:.97rem;line-height:2.0;margin:0;}
+/* 原文と訳を左右に置けるだけの幅があるときだけ2段組にする */
+@media (min-width:900px){
+  .gen .cl{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;
+    grid-template-areas:"n n" "orig ja";}
+  .gen .cl>.n{grid-area:n;}
+  .gen .orig{grid-area:orig;margin:0;}
+  .gen .ja{grid-area:ja;}
+}
+
+/* --- 印刷（机で解くため） --- */
+@media print{
+  .gen .cl{display:block !important;}
+  .gen .orig{font-size:.8rem;}
+  body{background:#fff !important;}
+  .masthead,.sitenav,.toggle,.nextup,.backbar{display:none !important;}
+  .sheet{box-shadow:none;border:none;padding:0;}
+  .hint>details:not([open])>div{display:none;}
+  details.gate:not([open])>.gin{display:none;}
+  details.gate{border:none;background:transparent;}
+  .qtext{break-inside:avoid;}
+  a[href]::after{content:"";}
+}
